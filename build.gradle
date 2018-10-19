@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.2"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE"
+    }
+}
+
+subprojects { project ->
+	if(!project.path.contains(':frontend')) {
+		apply plugin:"java"
+		apply plugin:"io.spring.dependency-management"
+
+		repositories {
+			mavenLocal()
+			jcenter()            
+		}
+
+	        dependencyManagement {
+			imports {
+				mavenBom "io.micronaut:micronaut-bom:$micronautVersion"
+			}
+		}
+	}
+}
+
+wrapper {
+    gradleVersion = '4.9'
+}
