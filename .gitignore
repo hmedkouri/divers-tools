@@ -1,2 +1,4 @@
 frontend/react/node_modules/
 frontend/react/package-lock.json
+
+*.lock
